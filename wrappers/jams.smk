@@ -1,3 +1,5 @@
+localrules: build_jams
+
 rule build_jams:
     '''
     Build jams from a given filename
