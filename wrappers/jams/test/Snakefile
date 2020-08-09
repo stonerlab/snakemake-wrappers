@@ -1,0 +1,14 @@
+rule test:
+    input:
+        "test.cfg"
+    output: 
+        "sim/{T}K/{prefix}_final.h5"
+    log:
+        "sim/{T}K/{prefix}.log"
+    params:
+        exe="jams-v2.3.1+3.97ac53b",
+        name="{prefix}",
+        temperature="{T}",
+        alpha="0.1"
+    wrapper:
+        "file:../jams"
