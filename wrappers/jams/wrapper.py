@@ -21,6 +21,7 @@ def find_jams(filenames):
     return None
 
 name = snakemake.params.get("name")
+size = snakemake.params.get("size")
 temperature = snakemake.params.get("temperature")
 alpha = snakemake.params.get("alpha")
 cmc_constraint_theta = snakemake.params.get("cmc_constraint_theta")
@@ -94,10 +95,15 @@ for file in snakemake.input:
         break
 
 # Create config strings for common settings we use in parameter sweeps
+
+if size is not None:
+    command.append(
+        f" \"lattice : {{ size = [{size}]; }}; \" ")
+        
 if temperature is not None:
     command.append(
         f" \"physics : {{temperature={temperature};}};\" ")
-        
+
 if alpha is not None:
     command.append(f" \" materials = (")
     alpha_list=alpha.split(",")
