@@ -5,6 +5,7 @@ __license__ = "MIT"
 
 from shutil import which
 import os.path
+import re
 
 from snakemake.logging import logger
 from snakemake.shell import shell
@@ -121,7 +122,8 @@ if cmc_constraint_phi is not None:
         f" \"solver : {{cmc_constraint_phi={cmc_constraint_phi};}};\" ")
 
 if settings is not None:
-    command.append(f" \"{settings}\" ")
+    escaped_settings = re.sub(r'(?<!\\)\"', r'\"',settings)
+    command.append(f" \"{escaped_settings}\" ")
 
 escape_brackets = lambda string : string.translate(
     str.maketrans({"{":  r"{{", "}":  r"}}"}))
