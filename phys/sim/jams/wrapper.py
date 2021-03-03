@@ -72,8 +72,9 @@ command.append(f" {exe} ")
 # intended location
 if len(snakemake.output) > 0:
     output_path = os.path.dirname(snakemake.output[0])
-    makedirs(output_path)
-    command.append(f" --output=\"{output_path}\" ")
+    if output_path:
+        makedirs(output_path)
+        command.append(f" --output=\"{output_path}\" ")
 
 if name is not None:
     command.append(f' --name=\"{name}\" ')
