@@ -120,7 +120,7 @@ if cmc_constraint_phi is not None:
         f" \"solver : {{cmc_constraint_phi={cmc_constraint_phi};}};\" ")
 
 if extra is not None:
-    command.append(extra)
+    command.append(f" \"{extra}\" ")
 
 escape_brackets = lambda string : string.translate(
     str.maketrans({"{":  r"{{", "}":  r"}}"}))
