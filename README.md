@@ -13,6 +13,8 @@ snakemake --wrapper-prefix="https://github.com/stonerlab/snakemake-wrappers/raw/
 The wrapper allows easy execution of JAMS with some common parameters being configured as Snakemake params. And example input would be:
 
 ```
+WRAPPER_PREFIX="https://github.com/stonerlab/snakemake-wrappers/raw"
+
 rule test:
     input:
         "test.cfg"
@@ -26,8 +28,10 @@ rule test:
         temperature="{T}",
         alpha="0.1"
     wrapper:
-        "file:wrappers/jams"
+        f"{WRAPPER_PREFIX}/0.1.3/phys/sim/jams"
 ```
+
+Here we have used a variable `WRAPPER_PREFIX` instead of the command line argument `--wrapper-prefix` to make the work flow more portable.
 
 The JAMS executable can be specified either as a path in `input` or a path or executable name in `params.exe`. If only the name is given then the wrapper will search PATH for the name. If neither `input` or `params.exe` work then it searches PATH for 'jams' anyway. 
 
