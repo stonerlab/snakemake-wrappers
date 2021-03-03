@@ -26,9 +26,10 @@ rule test:
         exe="jams-v2.3.1+3.97ac53b",
         name="{prefix}",
         temperature="{T}",
-        alpha="0.1"
+        alpha="0.1",
+        settings="hamiltonians = ({ radius_cutoff = {r_cut}; });"
     wrapper:
-        f"{WRAPPER_PREFIX}/0.1.3/phys/sim/jams"
+        f"{WRAPPER_PREFIX}/0.1.4/phys/sim/jams"
 ```
 
 Here we have used a variable `WRAPPER_PREFIX` instead of the command line argument `--wrapper-prefix` to make the work flow more portable.
@@ -44,8 +45,9 @@ The terminal output of JAMS is written to the `log`. If no `log` is given then t
 Valid `params` are:
 - `exe`: JAMS executable
 - `name`: name to use for simulation (and basename of output files) 
+- `size`: a comma separated list inside a string of dimensions for the lattice (e.g. `size="32,32,32"`)
 - `temperature`: JAMS option physics.temperature
-- `alpha`: must be a comma separated list (inside a string) of alpha for each material (e.g. `alpha="0.1,0.1"`)
+- `alpha`: a comma separated list inside a string of alpha for each material (e.g. `alpha="0.1,0.1"`)
 - `cmc_constraint_theta`: Constrained Monte Carlo theta constraint
 - `cmc_constraint_phi`: Constrained Monte Carlo phi constraint
-- `extra`: A string with any additional arguments or config settings for JAMS. Take care to properly escape quotes (`""`) and curly brackets (`{}`)
+- `settings`: A string with any additional settings for JAMS.
