@@ -26,7 +26,7 @@ temperature = snakemake.params.get("temperature")
 alpha = snakemake.params.get("alpha")
 cmc_constraint_theta = snakemake.params.get("cmc_constraint_theta")
 cmc_constraint_phi = snakemake.params.get("cmc_constraint_phi")
-extra = snakemake.params.get("extra", "")
+settings = snakemake.params.get("settings", "")
 
 # set default output location to where snakemake is executing
 output_path="."
@@ -120,8 +120,8 @@ if cmc_constraint_phi is not None:
     command.append(
         f" \"solver : {{cmc_constraint_phi={cmc_constraint_phi};}};\" ")
 
-if extra is not None:
-    command.append(f" \"{extra}\" ")
+if settings is not None:
+    command.append(f" \"{settings}\" ")
 
 escape_brackets = lambda string : string.translate(
     str.maketrans({"{":  r"{{", "}":  r"}}"}))
