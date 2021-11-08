@@ -13,23 +13,23 @@ snakemake --wrapper-prefix="https://github.com/stonerlab/snakemake-wrappers/raw/
 The wrapper allows easy execution of JAMS with some common parameters being configured as Snakemake params. And example input would be:
 
 ```
-WRAPPER_PREFIX="https://github.com/stonerlab/snakemake-wrappers/raw"
+WRAPPER_PREFIX='https://github.com/stonerlab/snakemake-wrappers/raw'
 
 rule test:
     input:
-        "test.cfg"
+        'test.cfg'
     output: 
-        "sim/{T}K/{prefix}_final.h5"
+        'sim/{T}K/{prefix}_final.h5'
     log:
-        "sim/{T}K/{prefix}.log"
+        'sim/{T}K/{prefix}.log'
     params:
-        exe="jams-v2.3.1+3.97ac53b",
-        name="{prefix}",
-        temperature="{T}",
-        alpha="0.1",
-        settings="hamiltonians = ({ radius_cutoff = {r_cut}; });"
+        exe='jams-v2.3.1+3.97ac53b',
+        name='{prefix}',
+        temperature='{T}',
+        alpha='0.1',
+        settings='hamiltonians = ({ radius_cutoff = {r_cut}; });'
     wrapper:
-        f"{WRAPPER_PREFIX}/0.1.4/phys/sim/jams"
+        f"{WRAPPER_PREFIX}/0.1.5/phys/sim/jams"
 ```
 
 Here we have used a variable `WRAPPER_PREFIX` instead of the command line argument `--wrapper-prefix` to make the work flow more portable.
@@ -51,3 +51,5 @@ Valid `params` are:
 - `cmc_constraint_theta`: Constrained Monte Carlo theta constraint
 - `cmc_constraint_phi`: Constrained Monte Carlo phi constraint
 - `settings`: A string with any additional settings for JAMS.
+
+**NOTE**: String settings in JAMS config files must use double quotes (") and so the string given to `settings` in the params must use single quotes for the python definition of the string so that you can use double quotes inside of the string.
